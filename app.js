@@ -1,13 +1,14 @@
 const express = require('express');
 const mongoose = require('mongoose');
-
+const cors = require('cors');
 
 const app = express();
 const port = 3000;
 
-app.use(express.json());
+app.use(cors());              // ✅ đặt lên trên
+app.use(express.json());      // ✅ cũng nên ở trên
 
-// connect MongoDB trực tiếp
+// connect MongoDB
 mongoose.connect('mongodb+srv://qldkmh_db_user:nOxCJf4m1xHMXmOZ@qldkmh.9t9ql4q.mongodb.net/QLDKMH')
     .then(() => console.log('✅ Connected MongoDB Atlas'))
     .catch(err => console.log(err));

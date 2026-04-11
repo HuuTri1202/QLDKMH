@@ -13,9 +13,9 @@ router.get('/all', async (req, res) => {
 });
 
 // GET /courses/:id - Lấy môn học theo ID
-router.get('/:id', async (req, res) => {
+router.get('/:courseCode', async (req, res) => {
   try {
-    const course = await Course.findById(req.params.id);
+    const course = await Course.findOne({ courseCode: req.params.courseCode.toUpperCase() });
     if (!course) return res.status(404).json({ message: 'Môn học không tồn tại' });
     res.json(course);
   } catch (error) {
