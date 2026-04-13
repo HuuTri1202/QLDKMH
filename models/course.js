@@ -26,70 +26,59 @@ const scheduleSchema = new mongoose.Schema({
     required: true,
   },
 });
-const courseSchema = new mongoose.Schema({
-  // Mã môn học
-  courseCode: {
-    type: String,
-    required: [true, "Mã môn học là bắt buộc"],
-    unique: true,
-    trim: true,
-    uppercase: true,
-  },
 
-  // Tên môn
-  courseName: {
-    type: String,
-    required: [true, "Tên môn học là bắt buộc"],
-    trim: true,
-  },
+const courseSchema = new mongoose.Schema(
+  {
+    courseCode: {
+      type: String,
+      required: [true, "Mã môn học là bắt buộc"],
+      unique: true,
+      trim: true,
+      uppercase: true,
+    },
 
-  // Giảng viên
-  instructor: {
-    type: String,
-    required: [true, "Giảng viên là bắt buộc"],
-    trim: true,
-  },
+    courseName: {
+      type: String,
+      required: [true, "Tên môn học là bắt buộc"],
+      trim: true,
+    },
 
-  // Lịch học
-  schedule: [scheduleSchema],
+    instructor: {
+      type: String,
+      required: [true, "Giảng viên là bắt buộc"],
+      trim: true,
+    },
 
-  // Sức chứa
-  maxCapacity: {
-    type: Number,
-    required: [true, "Sức chứa tối đa là bắt buộc"],
-    min: [1, "Tối thiểu 1 học viên"],
-  },
-  currentEnrollment: {
-    type: Number,
-    default: 0,
-    min: 0,
-  },
+    schedule: [scheduleSchema],
 
-  // Trạng thái
-  status: {
-    type: String,
-    enum: ["Mở", "Đóng", "Hủy"],
-    default: "Mở",
-  },
+    maxCapacity: {
+      type: Number,
+      required: true,
+      min: 1,
+    },
 
-  // Loại môn
-  courseType: {
-    type: String,
-    enum: ["Lý thuyết", "Thực hành", "Lý thuyết + Thực hành"],
-    default: "Lý thuyết",
-  },
+    currentEnrollment: {
+      type: Number,
+      default: 0,
+      min: 0,
+    },
 
-  // Timestamps
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
-  updatedAt: {
-    type: Date,
-    default: Date.now,
-  },
-});
+    status: {
+      type: String,
+      enum: ["Mở", "Đóng", "Hủy"],
+      default: "Mở",
+    },
 
-const Course = mongoose.model("Course", courseSchema);
+    courseType: {
+      type: String,
+      enum: ["Lý thuyết", "Thực hành", "Lý thuyết + Thực hành"],
+      default: "Lý thuyết",
+    },
+  },
+  { timestamps: true } //  FIX timestamps chuẩn
+);
 
-module.exports = Course;
+//  Index tối ưu
+courseSchema.index({ courseCode: 1 });
+
+module.exports = mongoose.model("Course", courseSchema);

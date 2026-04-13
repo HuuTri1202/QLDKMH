@@ -7,22 +7,29 @@
 </head>
 <body>
 
-<h2>Thêm môn học</h2>
+<div class="container">
+  <h2>📚 Thêm môn học</h2>
 
-<form id="form">
-  <input placeholder="Mã môn" id="code"><br>
-  <input placeholder="Tên môn" id="name"><br>
-  <input placeholder="Giảng viên" id="teacher"><br>
+  <form id="form" class="form-card">
+    <input placeholder="Mã môn" id="code" required>
+    <input placeholder="Tên môn" id="name" required>
+    <input placeholder="Giảng viên" id="teacher" required>
 
-  <select id="type">
-    <option>Lý thuyết</option>
-    <option>Thực hành</option>
-    <option>Lý thuyết + Thực hành</option>
-  </select><br>
+    <select id="type">
+      <option>Lý thuyết</option>
+      <option>Thực hành</option>
+      <option>Lý thuyết + Thực hành</option>
+    </select>
 
-  <button type="submit">Tạo</button>
-</form>
+    <input type="number" id="capacity" placeholder="Sức chứa" required>
 
-<script src="../js/add-course.js"></script>
+    <h4>📅 Lịch học</h4>
+    <div id="schedule-container"></div>
+
+    <button type="submit">Tạo môn học</button>
+  </form>
+</div>
+
+<script src="../js/add-courses.js"></script>
 </body>
 </html>

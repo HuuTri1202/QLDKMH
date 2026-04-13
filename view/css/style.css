@@ -1,9 +1,11 @@
+/* ===== RESET CHUNG ===== */
 body {
-  font-family: Arial;
+  font-family: Arial, sans-serif;
   margin: 0;
-  background: #f4f4f4;
+  background: #f5f7fa;
 }
 
+/* ===== HEADER + NAV ===== */
 header {
   background: #007bff;
   color: white;
@@ -23,11 +25,18 @@ nav a {
   text-decoration: none;
 }
 
+/* ===== MAIN ===== */
 main {
   padding: 20px;
   text-align: center;
 }
 
+h2 {
+  text-align: center;
+  color: #333;
+}
+
+/* ===== CARD TRANG CHỦ ===== */
 .card-container {
   display: flex;
   justify-content: center;
@@ -52,45 +61,57 @@ main {
   border-radius: 5px;
   text-decoration: none;
 }
-body {
-  font-family: Arial;
-  margin: 20px;
+
+/* ===== FORM (THÊM MÔN - ĐẸP HƠN) ===== */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
 }
 
-h2 {
-  color: #333;
+.form-card {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  width: 320px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
-input, select, button {
-  padding: 8px;
-  margin: 5px 0;
+input, select {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: 0.3s;
 }
 
+input:focus, select:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 5px rgba(0,123,255,0.4);
+}
+
+/* ===== BUTTON CHUNG ===== */
 button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
   cursor: pointer;
   background: #007bff;
   color: white;
-  border: none;
+  transition: 0.3s;
 }
 
 button:hover {
   background: #0056b3;
+  transform: translateY(-1px);
 }
 
-.course {
-  border: 1px solid #ddd;
-  padding: 10px;
-  margin-bottom: 10px;
-}body {
-  font-family: Arial, sans-serif;
-  padding: 20px;
-  background: #f5f7fa;
-}
-
-h2 {
-  text-align: center;
-}
-
+/* ===== DANH SÁCH MÔN ===== */
 #courseList {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -114,20 +135,11 @@ h2 {
   padding-left: 20px;
 }
 
-button {
-  margin-right: 10px;
-  padding: 5px 10px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-button:first-of-type {
+/* Nút riêng trong course */
+.course button:first-of-type {
   background: #dc3545;
-  color: white;
 }
 
-button:last-of-type {
+.course button:last-of-type {
   background: #007bff;
-  color: white;
 }
