@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Đăng ký môn học trực tuyến</title>
+  <link rel="stylesheet" href="/view/css/style.css">
+</head>
+<body>
+    <header>
+    <h1>🎓 Hệ thống đăng ký môn học</h1>
+    <p>Quản lý và đăng ký môn học </p>
+  </header>
+  <nav>
+    <a href="trangchu.html">🏠 Trang chủ</a>
+    <a href="courses.html">📚 Quản lý môn học</a>
+    <a href="enroll.html">📝 Đăng ký môn</a>
+  </nav>
+  <div class="container">
+    <h1>📌 ĐĂNG KÝ MÔN HỌC HỌC</h1>
+    <div class="student-info">
+      <label>👨‍🎓 Chọn sinh viên: </label>
+      <select id="studentSelect" style="padding: 6px; width: 260px;"></select>
+      <span id="studentDetail" style="margin-left: 20px;"></span>
+    </div>
+    <div class="reg-container">
+      <div class="course-box">
+        <h2>📖 Danh sách môn có thể đăng ký</h2>
+        <div id="courseList"></div>
+      </div>
+      <div class="enrolled-box">
+        <h2>✅ Môn đã đăng ký</h2>
+        <div id="enrolledCourses"></div>
+        <div id="totalCredits" class="total-credits"></div>
+      </div>
+    </div>
+  </div>
+  <script src="/view/js/register.js"></script>
+</body>
+</html>

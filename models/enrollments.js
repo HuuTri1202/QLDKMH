@@ -4,7 +4,7 @@ const enrollmentSchema = new mongoose.Schema({
   // Sinh viên
   student: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
+    ref: "Student",
     required: [true, "Sinh viên là bắt buộc"],
   },
 
@@ -37,6 +37,14 @@ const enrollmentSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+});
+
+// Đảm bảo một sinh viên không đăng ký cùng môn hai lần
+enrollmentSchema.index({ student: 1, course: 1 }, { unique: true });
+
+// Tự động cập nhật updatedAt mỗi khi lưu
+enrollmentSchema.pre("save", function () {
+  this.updatedAt = Date.now();
 });
 
 const Enrollment = mongoose.model("Enrollment", enrollmentSchema);

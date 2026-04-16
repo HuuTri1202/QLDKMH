@@ -8,7 +8,7 @@ const scheduleSchema = new mongoose.Schema({
   },
   dayOfWeek: {
     type: String,
-    enum: ["Thứ 2","Thứ 3","Thứ 4","Thứ 5","Thứ 6","Thứ 7","Chủ nhật"],
+    enum: ["Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6", "Thứ 7", "Chủ nhật"],
     required: true,
   },
   startTime: {
@@ -29,11 +29,11 @@ const courseSchema = new mongoose.Schema({
   courseCode: { type: String, required: true, unique: true, uppercase: true },
   courseName: { type: String, required: true },
   instructor: { type: String, required: true },
+  credits: { type: Number, default: 0 },
 
-  // FIX QUAN TRỌNG
   schedule: {
     type: [scheduleSchema],
-    default: []
+    default: [],
   },
 
   maxCapacity: { type: Number, required: true },
@@ -45,7 +45,8 @@ const courseSchema = new mongoose.Schema({
     default: "Mở",
   },
 
-  courseType: String
+  courseType: String,
+  enrolledCount: { type: Number, default: 0 },
 });
 
 module.exports = mongoose.model("Course", courseSchema);

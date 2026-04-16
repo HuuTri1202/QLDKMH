@@ -1,6 +1,6 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const Course = require('../models/course');
+const Course = require("../models/course");
 
 // ================== HELPER ==================
 const validateCourse = (data) => {
@@ -20,7 +20,17 @@ const autoCloseCourse = (course) => {
 };
 
 // ================== GET ALL ==================
-router.get('/all', async (req, res) => {
+router.get("/", async (req, res) => {
+  try {
+    const courses = await Course.find();
+    res.json(courses);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// ================== GET ALL (alias) ==================
+router.get("/all", async (req, res) => {
   try {
     const courses = await Course.find();
     res.json(courses);
@@ -30,14 +40,14 @@ router.get('/all', async (req, res) => {
 });
 
 // ================== GET BY CODE ==================
-router.get('/:courseCode', async (req, res) => {
+router.get("/:courseCode", async (req, res) => {
   try {
     const course = await Course.findOne({
-      courseCode: req.params.courseCode.toUpperCase()
+      courseCode: req.params.courseCode.toUpperCase(),
     });
 
     if (!course) {
-      return res.status(404).json({ message: 'Môn học không tồn tại' });
+      return res.status(404).json({ message: "Môn học không tồn tại" });
     }
 
     res.json(course);
@@ -47,7 +57,7 @@ router.get('/:courseCode', async (req, res) => {
 });
 
 // ================== CREATE ==================
-router.post('/create', async (req, res) => {
+router.post("/create", async (req, res) => {
   try {
     validateCourse(req.body);
 
@@ -61,9 +71,7 @@ router.post('/create', async (req, res) => {
       message: "Tạo môn học thành công",
       data: newCourse,
     });
-
   } catch (error) {
-
     // duplicate courseCode
     if (error.code === 11000) {
       return res.status(400).json({ message: "Mã môn học đã tồn tại" });
@@ -74,7 +82,7 @@ router.post('/create', async (req, res) => {
 });
 
 // ================== UPDATE ==================
-router.put('/update/:courseCode', async (req, res) => {
+router.put("/update/:courseCode", async (req, res) => {
   try {
     const code = req.params.courseCode.toUpperCase();
 
@@ -97,13 +105,13 @@ router.put('/update/:courseCode', async (req, res) => {
     course.schedule = []; // clear trước
 
     if (Array.isArray(req.body.schedule)) {
-      req.body.schedule.forEach(s => {
+      req.body.schedule.forEach((s) => {
         course.schedule.push({
           type: s.type,
           dayOfWeek: s.dayOfWeek,
           startTime: s.startTime,
           endTime: s.endTime,
-          location: s.location
+          location: s.location,
         });
       });
     }
@@ -113,7 +121,6 @@ router.put('/update/:courseCode', async (req, res) => {
     console.log("UPDATED:", course);
 
     res.json(course);
-
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: err.message });
@@ -121,18 +128,17 @@ router.put('/update/:courseCode', async (req, res) => {
 });
 
 // ================== DELETE ==================
-router.delete('/delete/:courseCode', async (req, res) => {
+router.delete("/delete/:courseCode", async (req, res) => {
   try {
     const course = await Course.findOneAndDelete({
-      courseCode: req.params.courseCode.toUpperCase()
+      courseCode: req.params.courseCode.toUpperCase(),
     });
 
     if (!course) {
-      return res.status(404).json({ message: 'Môn học không tồn tại' });
+      return res.status(404).json({ message: "Môn học không tồn tại" });
     }
 
-    res.json({ message: 'Môn học đã được xóa' });
-
+    res.json({ message: "Môn học đã được xóa" });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
